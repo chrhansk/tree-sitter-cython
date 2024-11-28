@@ -610,6 +610,12 @@ module.exports = grammar(Python, {
         "noexcept",
       ),
 
+    parameter_default: $ =>
+      seq(
+        "=",
+        field("value", $.expression)
+      ),
+
     typed_parameter: $ =>
       prec(
         PREC.typed_parameter,
@@ -634,6 +640,7 @@ module.exports = grammar(Python, {
             ),
             ":",
             field("type", choice($.c_type, $.string)),
+            optional($.parameter_default)
           ),
         ),
       ),
@@ -645,8 +652,7 @@ module.exports = grammar(Python, {
           field("type", $.c_type),
           field("name", $.identifier),
           optional($.type_index),
-          "=",
-          field("value", $.expression),
+          $.parameter_default
         ),
       ),
 

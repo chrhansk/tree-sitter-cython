@@ -1187,3 +1187,23 @@ c'literal'
       (string_start)
       (string_content)
       (string_end))))
+=====================================
+Annotated function with default value
+=====================================
+def fun(b: "test" = 2):
+    pass
+---
+(module
+  (function_definition
+    (identifier)
+    (parameters
+      (typed_parameter
+        (identifier)
+        (string
+          (string_start)
+          (string_content)
+          (string_end))
+        (parameter_default
+          (integer))))
+    (block
+      (pass_statement))))
