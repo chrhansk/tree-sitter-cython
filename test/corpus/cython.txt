@@ -1079,6 +1079,7 @@ Function definition with function argument
 =====================================
 cdef extern from *:
   cdef void func(int, int (*)(int, int))
+  void other_func(void (*func)(object), object)
 ---
 (module
   (cdef_statement
@@ -1100,7 +1101,23 @@ cdef extern from *:
                   (maybe_typed_name
                     (int_type))
                   (maybe_typed_name
-                    (int_type)))))))))))
+                    (int_type)))))))
+        (cvar_decl
+          (c_type
+            (identifier))
+          (c_name
+            (identifier))
+          (c_function_definition
+            (c_parameters
+              (c_function_argument_type
+                (c_type
+                  (identifier))
+                (identifier)
+                (c_parameters
+                  (maybe_typed_name
+                    (identifier))))
+              (maybe_typed_name
+                (identifier)))))))))
 =====================================
 IF statement
 =====================================
