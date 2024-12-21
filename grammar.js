@@ -572,9 +572,11 @@ module.exports = grammar(Python, {
 
     c_parameters: $ => seq("(", optional($._typedargslist), ")"),
 
-    // e.g. int (*)(const char, int)
+    // e.g.
+    // int (*)(const char, int)
+    // int (*func)(const char, int)
     c_function_argument_type: $ =>
-      seq($.c_type, "(", "*", ")", $.c_parameters),
+      seq($.c_type, "(", "*", optional($.identifier), ")", $.c_parameters),
 
     _typedargument: $ =>
       seq(
