@@ -455,17 +455,11 @@ module.exports = grammar(Python, {
     c_function_pointer_name: $ =>
       seq("(", "*", field("name", $.identifier), ")"),
 
-    c_function_pointer_args: $ =>
-      choice("...",
-        seq(commaSep1($.c_type), optional(seq(", ", "...")))),
-
     c_function_pointer_type: $ =>
       seq(
         $.c_type,
         $.c_function_pointer_name,
-        "(",
-        optional($.c_function_pointer_args),
-        ")",
+        $.c_parameters,
       ),
 
     // type_qualifier: '*' | '**' | '&' | type_index ('.' NAME [type_index])*

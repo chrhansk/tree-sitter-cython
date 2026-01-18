@@ -1000,21 +1000,6 @@
     }
   },
   {
-    "type": "c_function_pointer_args",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "c_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "c_function_pointer_name",
     "named": true,
     "fields": {
@@ -1039,11 +1024,11 @@
       "required": true,
       "types": [
         {
-          "type": "c_function_pointer_args",
+          "type": "c_function_pointer_name",
           "named": true
         },
         {
-          "type": "c_function_pointer_name",
+          "type": "c_parameters",
           "named": true
         },
         {
@@ -4694,10 +4679,6 @@
   },
   {
     "type": ",",
-    "named": false
-  },
-  {
-    "type": ", ",
     "named": false
   },
   {

@@ -788,8 +788,8 @@ ctypedef int (*printf_func)(const char*, ...)
         (int_type))
       (c_function_pointer_name
         (identifier))
-      (c_function_pointer_args
-        (c_type
+      (c_parameters
+        (maybe_typed_name
           (int_type)
           (type_qualifier))))))
 
