@@ -1066,7 +1066,7 @@
           "named": true
         },
         {
-          "type": "type_qualifier",
+          "type": "type_modifier",
           "named": true
         }
       ]
@@ -1128,6 +1128,10 @@
         },
         {
           "type": "int_type",
+          "named": true
+        },
+        {
+          "type": "type_modifier",
           "named": true
         },
         {
@@ -1799,7 +1803,7 @@
           "named": true
         },
         {
-          "type": "type_qualifier",
+          "type": "type_modifier",
           "named": true
         }
       ]
@@ -3373,6 +3377,10 @@
           "named": true
         },
         {
+          "type": "type_modifier",
+          "named": true
+        },
+        {
           "type": "type_qualifier",
           "named": true
         }
@@ -4243,6 +4251,25 @@
     }
   },
   {
+    "type": "type_modifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type_index",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "type_parameter",
     "named": true,
     "fields": {},
@@ -4260,21 +4287,7 @@
   {
     "type": "type_qualifier",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "type_index",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "typed_default_parameter",

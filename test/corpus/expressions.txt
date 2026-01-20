@@ -715,111 +715,6 @@ c //= 1
       (integer))))
 
 ================================================================================
-Named expressions
-:skip
-================================================================================
-
-a := x
-(y := f(x))
-foo(x=(y := f(x)))
-y0 = (y1 := f(x))
-def foo(answer=(p := 42)):
-  return answer;
-def foo(answer: (p := 42) = 5):
-  return answer;
-foo(x := 3, cat='vector')
-(z := (y := (x := 0)))
-
---------------------------------------------------------------------------------
-
-(module
-  (expression_statement
-    (named_expression
-      (identifier)
-      (identifier)))
-  (expression_statement
-    (parenthesized_expression
-      (named_expression
-        (identifier)
-        (call
-          (identifier)
-          (argument_list
-            (identifier))))))
-  (expression_statement
-    (call
-      (identifier)
-      (argument_list
-        (keyword_argument
-          (identifier)
-          (parenthesized_expression
-            (named_expression
-              (identifier)
-              (call
-                (identifier)
-                (argument_list
-                  (identifier)))))))))
-  (expression_statement
-    (assignment
-      (identifier)
-      (parenthesized_expression
-        (named_expression
-          (identifier)
-          (call
-            (identifier)
-            (argument_list
-              (identifier)))))))
-  (function_definition
-    (identifier)
-    (parameters
-      (default_parameter
-        (identifier)
-        (parenthesized_expression
-          (named_expression
-            (identifier)
-            (integer)))))
-    (block
-      (return_statement
-        (identifier))))
-  (function_definition
-    (identifier)
-    (parameters
-      (typed_default_parameter
-        (identifier)
-        (type
-          (parenthesized_expression
-            (named_expression
-              (identifier)
-              (integer))))
-        (integer)))
-    (block
-      (return_statement
-        (identifier))))
-  (expression_statement
-    (call
-      (identifier)
-      (argument_list
-        (named_expression
-          (identifier)
-          (integer))
-        (keyword_argument
-          (identifier)
-          (string
-            (string_start)
-            (string_content)
-            (string_end))))))
-  (expression_statement
-    (parenthesized_expression
-      (named_expression
-        (identifier)
-        (parenthesized_expression
-          (named_expression
-            (identifier)
-            (parenthesized_expression
-              (named_expression
-                (identifier)
-                (integer)))))))))
-
-================================================================================
 Yield expressions
 ================================================================================
 
@@ -1013,37 +908,6 @@ slice(1,1,1) if a else d
       (identifier))))
 
 ================================================================================
-Async context managers and iterators
-:skip
-================================================================================
-
-async with a as b:
-  async for c in d:
-     [e async for f in g]
-
---------------------------------------------------------------------------------
-
-(module
-  (with_statement
-    (with_clause
-      (with_item
-        value: (as_pattern
-          (identifier)
-          alias: (as_pattern_target
-            (identifier)))))
-    body: (block
-      (for_statement
-        left: (identifier)
-        right: (identifier)
-        body: (block
-          (expression_statement
-            (list_comprehension
-              body: (identifier)
-              (for_in_clause
-                left: (identifier)
-                right: (identifier)))))))))
-
-================================================================================
 Arbitrary indentation between brackets
 ================================================================================
 
@@ -1110,23 +974,6 @@ w, x, y, z = 0, *a, c
         (identifier)))))
 
 ================================================================================
-A function called match
-:skip
-================================================================================
-
-match(r1, r2, r3)
-
---------------------------------------------------------------------------------
-
-(module
-  (expression_statement
-    (call
-      (identifier)
-      (argument_list
-        (identifier)
-        (identifier)
-        (identifier)))))
-================================================================================
 New expressions
 ================================================================================
 
@@ -1147,4 +994,27 @@ new int(a)
       (c_type
         (int_type))
       (argument_list
+        (identifier)))))
+
+================================================================================
+Type qualifiers
+================================================================================
+
+cdef const volatile int x
+cdef volatile const int y
+
+--------------------------------------------------------------------------------
+
+(module
+  (cdef_statement
+    (cvar_def
+      (maybe_typed_name
+        (type_qualifier)
+        (int_type)
+        (identifier))))
+  (cdef_statement
+    (cvar_def
+      (maybe_typed_name
+        (type_qualifier)
+        (int_type)
         (identifier)))))
