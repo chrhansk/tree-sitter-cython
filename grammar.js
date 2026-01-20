@@ -469,6 +469,7 @@ module.exports = grammar(Python, {
     type_modifier: $ =>
       choice(
         "*",
+        seq("*", "const"),
         "**",
         "&",
         "__stdcall",
