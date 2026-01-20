@@ -1016,6 +1016,29 @@
     }
   },
   {
+    "type": "c_function_pointer_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "c_function_pointer_name",
+          "named": true
+        },
+        {
+          "type": "c_parameters",
+          "named": true
+        },
+        {
+          "type": "c_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "c_integer_type",
     "named": true,
     "fields": {},
@@ -1097,10 +1120,6 @@
       "types": [
         {
           "type": "c_type",
-          "named": true
-        },
-        {
-          "type": "function_pointer_type",
           "named": true
         },
         {
@@ -1666,6 +1685,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "c_function_pointer_type",
+          "named": true
+        },
         {
           "type": "class_definition",
           "named": true
@@ -2675,21 +2698,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "function_pointer_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "c_type",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -4947,7 +4955,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "compl",
@@ -5099,7 +5108,8 @@
   },
   {
     "type": "line_continuation",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "long",
