@@ -421,58 +421,6 @@ else:
           (identifier))))))
 
 ================================================================================
-For statements
-:skip
-================================================================================
-
-for line, i in lines:
-  print line
-  for character, j in line:
-    print character
-else:
-  print x
-
-for x, in [(1,), (2,), (3,)]:
-  x
-
---------------------------------------------------------------------------------
-
-(module
-  (for_statement
-    left: (pattern_list
-      (identifier)
-      (identifier))
-    right: (identifier)
-    body: (block
-      (print_statement
-        argument: (identifier))
-      (for_statement
-        left: (pattern_list
-          (identifier)
-          (identifier))
-        right: (identifier)
-        body: (block
-          (print_statement
-            argument: (identifier)))))
-    alternative: (else_clause
-      body: (block
-        (print_statement
-          argument: (identifier)))))
-  (for_statement
-    left: (pattern_list
-      (identifier))
-    right: (list
-      (tuple
-        (integer))
-      (tuple
-        (integer))
-      (tuple
-        (integer)))
-    body: (block
-      (expression_statement
-        (identifier)))))
-
-================================================================================
 Try statements
 ================================================================================
 
@@ -654,266 +602,6 @@ with e as f, g as h,:
         (identifier)))))
 
 ================================================================================
-Async Function definitions
-:skip
-================================================================================
-
-async def a():
-  b
-
-async def c(d):
-  e
-
-async def g(g, h,):
-  i
-
-async def c(a: str):
-  a
-
-async def c(a: b.c):
-  a
-
-async def d(a: Sequence[T]) -> T:
-  a
-
-async def i(a, b=c, *c, **d):
-  a
-
-async def d(a: str) -> None:
-  return None
-
-async def d(a:str="default", b=c) -> None:
-  return None
-
---------------------------------------------------------------------------------
-
-(module
-  (function_definition
-    name: (identifier)
-    parameters: (parameters)
-    body: (block
-      (expression_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (identifier))
-    body: (block
-      (expression_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (identifier)
-      (identifier))
-    body: (block
-      (expression_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (typed_parameter
-        (identifier)
-        type: (type
-          (identifier))))
-    body: (block
-      (expression_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (typed_parameter
-        (identifier)
-        type: (type
-          (attribute
-            object: (identifier)
-            attribute: (identifier)))))
-    body: (block
-      (expression_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (typed_parameter
-        (identifier)
-        type: (type
-          (generic_type
-            (identifier)
-            (type_parameter
-              (type
-                (identifier)))))))
-    return_type: (type
-      (identifier))
-    body: (block
-      (expression_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (identifier)
-      (default_parameter
-        name: (identifier)
-        value: (identifier))
-      (list_splat_pattern
-        (identifier))
-      (dictionary_splat_pattern
-        (identifier)))
-    body: (block
-      (expression_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (typed_parameter
-        (identifier)
-        type: (type
-          (identifier))))
-    return_type: (type
-      (none))
-    body: (block
-      (return_statement
-        (none))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (typed_default_parameter
-        name: (identifier)
-        type: (type
-          (identifier))
-        value: (string
-          (string_start)
-          (string_content)
-          (string_end)))
-      (default_parameter
-        name: (identifier)
-        value: (identifier)))
-    return_type: (type
-      (none))
-    body: (block
-      (return_statement
-        (none)))))
-
-================================================================================
-Function definitions
-:skip
-================================================================================
-
-def e((a,b)):
-  return (a,b)
-
-def e(*list: str):
-  pass
-
-def e(**list: str):
-  pass
-
-def f():
-  nonlocal a
-
-def g(h, i, /, j, *, k=100, **kwarg):
-  return h,i,j,k,kwarg
-
-def h(*a):
-  i((*a))
-  j(((*a)))
-
-def foo():
-    pass \
-\
-\
-
---------------------------------------------------------------------------------
-
-(module
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (tuple_pattern
-        (identifier)
-        (identifier)))
-    body: (block
-      (return_statement
-        (tuple
-          (identifier)
-          (identifier)))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (typed_parameter
-        (list_splat_pattern
-          (identifier))
-        type: (type
-          (identifier))))
-    body: (block
-      (pass_statement)))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (typed_parameter
-        (dictionary_splat_pattern
-          (identifier))
-        type: (type
-          (identifier))))
-    body: (block
-      (pass_statement)))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters)
-    body: (block
-      (nonlocal_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (identifier)
-      (identifier)
-      (positional_separator)
-      (identifier)
-      (keyword_separator)
-      (default_parameter
-        name: (identifier)
-        value: (integer))
-      (dictionary_splat_pattern
-        (identifier)))
-    body: (block
-      (return_statement
-        (expression_list
-          (identifier)
-          (identifier)
-          (identifier)
-          (identifier)
-          (identifier)))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters
-      (list_splat_pattern
-        (identifier)))
-    body: (block
-      (expression_statement
-        (call
-          function: (identifier)
-          arguments: (argument_list
-            (parenthesized_expression
-              (list_splat
-                (identifier))))))
-      (expression_statement
-        (call
-          function: (identifier)
-          arguments: (argument_list
-            (parenthesized_expression
-              (parenthesized_expression
-                (list_splat
-                  (identifier)))))))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters)
-    body: (block
-      (pass_statement)))
-  (line_continuation)
-  (line_continuation)
-  (line_continuation))
-
-================================================================================
 Empty blocks
 ================================================================================
 
@@ -950,72 +638,6 @@ if d:
           function: (identifier)
           arguments: (argument_list))
         body: (block)))))
-
-================================================================================
-Class definitions
-:skip
-================================================================================
-
-class A:
-  def b(self):
-    return c
-class B():
-  pass
-class B(method1):
-  def method1(self):
-    return
-class C(method1, Sequence[T]):
-  pass
-class D(Sequence[T, U]):
-  pass
-
---------------------------------------------------------------------------------
-
-(module
-  (class_definition
-    (identifier)
-    (block
-      (function_definition
-        (identifier)
-        (parameters
-          (identifier))
-        (block
-          (return_statement
-            (identifier))))))
-  (class_definition
-    (identifier)
-    (argument_list)
-    (block
-      (pass_statement)))
-  (class_definition
-    (identifier)
-    (argument_list
-      (identifier))
-    (block
-      (function_definition
-        (identifier)
-        (parameters
-          (identifier))
-        (block
-          (return_statement)))))
-  (class_definition
-    (identifier)
-    (argument_list
-      (identifier)
-      (subscript
-        (identifier)
-        (identifier)))
-    (block
-      (pass_statement)))
-  (class_definition
-    (identifier)
-    (argument_list
-      (subscript
-        (identifier)
-        (identifier)
-        (identifier)))
-    (block
-      (pass_statement))))
 
 ================================================================================
 Class definitions with superclasses
@@ -1629,4 +1251,45 @@ def more_generic[T, *Ts, **P]():
                             (splat_type
                               (identifier)))))))))))))
       (return_statement
+        (identifier)))))
+
+================================================================================
+Const pointers
+================================================================================
+
+cdef void const_pointer_example(const int * const value):
+    pass
+
+cdef int* const ptr
+cdef const int* const ptr
+
+--------------------------------------------------------------------------------
+
+(module
+  (cdef_statement
+    (cvar_def
+      (maybe_typed_name
+        (identifier)
+        (identifier))
+      (c_function_definition
+        (c_parameters
+          (maybe_typed_name
+            (type_qualifier)
+            (int_type)
+            (type_modifier)
+            (identifier)))
+        (block
+          (pass_statement)))))
+  (cdef_statement
+    (cvar_def
+      (maybe_typed_name
+        (int_type)
+        (type_modifier)
+        (identifier))))
+  (cdef_statement
+    (cvar_def
+      (maybe_typed_name
+        (type_qualifier)
+        (int_type)
+        (type_modifier)
         (identifier)))))

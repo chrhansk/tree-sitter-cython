@@ -290,12 +290,12 @@ cdef ullong factorial(int n):
       (cvar_def
         (maybe_typed_name
           (int_type)
-          (type_qualifier)
+          (type_modifier)
           (identifier)))
       (cvar_def
         (maybe_typed_name
           (int_type)
-          (type_qualifier
+          (type_modifier
             (type_index
               (memory_view_index)))
           (identifier)))
@@ -398,7 +398,7 @@ cdef extern from *:
         (cvar_decl
           (c_type
             (identifier)
-            (type_qualifier))
+            (type_modifier))
           (c_name
             (identifier))
           (c_function_definition
@@ -415,7 +415,7 @@ cdef extern from *:
             (c_parameters
               (maybe_typed_name
                 (identifier)
-                (type_qualifier)
+                (type_modifier)
                 (identifier))))))))
   (cdef_statement
     (extern_block
@@ -428,8 +428,9 @@ cdef extern from *:
           (c_function_definition
             (c_parameters
               (maybe_typed_name
-                (int_type)
                 (type_qualifier)
+                (int_type)
+                (type_modifier)
                 (identifier)))))))))
 
 ================================================================================
@@ -534,7 +535,7 @@ cdef numeric add(numeric a, numeric b)
             (c_parameters
               (maybe_typed_name
                 (identifier)
-                (type_qualifier)
+                (type_modifier)
                 (identifier))))))))
   (cdef_statement
     (cdef_type_declaration
@@ -558,7 +559,7 @@ cdef numeric add(numeric a, numeric b)
     (cvar_def
       (maybe_typed_name
         (int_type)
-        (type_qualifier
+        (type_modifier
           (type_index
             (memory_view_index)))
         (identifier))
@@ -636,8 +637,9 @@ cdef extern from "stdio.h":
           (c_function_definition
             (c_parameters
               (maybe_typed_name
-                (int_type)
                 (type_qualifier)
+                (int_type)
+                (type_modifier)
                 (identifier)))))
         (cvar_decl
           (c_type
@@ -647,8 +649,9 @@ cdef extern from "stdio.h":
           (c_function_definition
             (c_parameters
               (maybe_typed_name
-                (int_type)
                 (type_qualifier)
+                (int_type)
+                (type_modifier)
                 (identifier)))))))))
 
 =====================================
@@ -682,7 +685,7 @@ cdef int format_message(char *prefix, int count, ...)
         (c_parameters
           (maybe_typed_name
             (int_type)
-            (type_qualifier)
+            (type_modifier)
             (identifier))
           (maybe_typed_name
             (int_type)
@@ -744,8 +747,9 @@ cdef public int logging(const char *level, ...)
       (c_function_definition
         (c_parameters
           (maybe_typed_name
-            (int_type)
             (type_qualifier)
+            (int_type)
+            (type_modifier)
             (identifier)))))))
 
 =====================================
@@ -771,8 +775,9 @@ cdef class Logger:
                   (maybe_typed_name
                     (identifier))
                   (maybe_typed_name
-                    (int_type)
                     (type_qualifier)
+                    (int_type)
+                    (type_modifier)
                     (identifier)))))))))))
 
 =====================================
@@ -790,8 +795,9 @@ ctypedef int (*printf_func)(const char*, ...)
         (identifier))
       (c_parameters
         (maybe_typed_name
+          (type_qualifier)
           (int_type)
-          (type_qualifier))))))
+          (type_modifier))))))
 
 =====================================
 Simple external definition
@@ -862,7 +868,7 @@ ctypedef class FastArray(object) [object fastarray]:
           (cvar_def
             (maybe_typed_name
               (int_type)
-              (type_qualifier)
+              (type_modifier)
               (identifier))))
         (cdef_statement
           (cvar_def
@@ -922,7 +928,7 @@ ctypedef class Buffer(object) [object generic_buffer]:
           (cvar_def
             (maybe_typed_name
               (identifier)
-              (type_qualifier)
+              (type_modifier)
               (identifier))))))))
 
 =====================================
@@ -1012,26 +1018,31 @@ Declaration of a C function pointer variable
 =====================================
 cdef const int (*pfunc_add)(const char*, int)
 ---
+
 (module
   (cdef_statement
     (cvar_def
       (maybe_typed_name
+        (type_qualifier)
         (int_type)
         (c_function_pointer_name
           (identifier)))
       (c_function_definition
         (c_parameters
           (maybe_typed_name
+            (type_qualifier)
             (int_type)
-            (type_qualifier))
+            (type_modifier))
           (maybe_typed_name
             (int_type)))))))
+
 =====================================
 sizeof() with expression argument
 =====================================
 cdef int i, j, k
 i = sizeof(j + k)
 ---
+
 (module
   (cdef_statement
     (cvar_def
@@ -1047,6 +1058,7 @@ i = sizeof(j + k)
         (binary_operator
           (identifier)
           (identifier))))))
+
 =====================================
 sizeof() with function argument
 =====================================
@@ -1055,6 +1067,7 @@ cdef struct Spam:
 
 sizeof(Spam (*)())
 ---
+
 (module
   (cdef_statement
     (cdef_type_declaration
@@ -1072,6 +1085,7 @@ sizeof(Spam (*)())
         (c_type
           (identifier))
         (c_parameters)))))
+
 =====================================
 Function definition with function argument
 =====================================
@@ -1079,6 +1093,7 @@ cdef extern from *:
   cdef void func(int, int (*)(int, int))
   void other_func(void (*func)(object), object)
 ---
+
 (module
   (cdef_statement
     (extern_block
@@ -1116,6 +1131,7 @@ cdef extern from *:
                     (identifier))))
               (maybe_typed_name
                 (identifier)))))))))
+
 =====================================
 IF statement
 =====================================
@@ -1126,6 +1142,7 @@ ELIF False:
 ELSE:
     pass
 ---
+
 (module
   (IF_statement
     (true)
@@ -1138,21 +1155,25 @@ ELSE:
     (ELSE_clause
       (block
         (pass_statement)))))
+
 =====================================
 DEF statement
 =====================================
 DEF x = 1
 ---
+
 (module
   (DEF_statement
     (identifier)
     (integer)))
+
 =====================================
 Typed parameter with quoted type
 =====================================
 def func(x: "cython.int"):
     pass
 ---
+
 (module
   (function_definition
     (identifier)
@@ -1165,12 +1186,14 @@ def func(x: "cython.int"):
           (string_end))))
     (block
       (pass_statement))))
+
 =====================================
 Char literals
 =====================================
 c"literal"
 c'literal'
 ---
+
 (module
   (expression_statement
     (string
@@ -1182,12 +1205,14 @@ c'literal'
       (string_start)
       (string_content)
       (string_end))))
+
 =====================================
 Comma-separated expressions in for loops
 =====================================
 for b in False, True:
   pass
 ---
+
 (module
   (for_statement
     (for_in_loop

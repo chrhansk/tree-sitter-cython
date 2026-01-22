@@ -6964,7 +6964,7 @@
                         "members": [
                           {
                             "type": "SYMBOL",
-                            "name": "type_qualifier"
+                            "name": "type_modifier"
                           },
                           {
                             "type": "BLANK"
@@ -7813,6 +7813,22 @@
         ]
       }
     },
+    "type_qualifier": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "const"
+          },
+          {
+            "type": "STRING",
+            "value": "volatile"
+          }
+        ]
+      }
+    },
     "c_type": {
       "type": "PREC_RIGHT",
       "value": 1,
@@ -7823,17 +7839,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "const"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "volatile"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "type_qualifier"
               },
               {
                 "type": "BLANK"
@@ -7911,7 +7918,7 @@
             "type": "REPEAT",
             "content": {
               "type": "SYMBOL",
-              "name": "type_qualifier"
+              "name": "type_modifier"
             }
           }
         ]
@@ -7925,7 +7932,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "type_qualifier"
+              "name": "type_modifier"
             },
             {
               "type": "BLANK"
@@ -7948,17 +7955,8 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "const"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "volatile"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "type_qualifier"
                 },
                 {
                   "type": "BLANK"
@@ -8020,7 +8018,7 @@
                       "type": "REPEAT",
                       "content": {
                         "type": "SYMBOL",
-                        "name": "type_qualifier"
+                        "name": "type_modifier"
                       }
                     }
                   ]
@@ -8063,7 +8061,7 @@
               "type": "REPEAT",
               "content": {
                 "type": "SYMBOL",
-                "name": "type_qualifier"
+                "name": "type_modifier"
               }
             }
           ]
@@ -8075,17 +8073,8 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "const"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "volatile"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "type_qualifier"
                 },
                 {
                   "type": "BLANK"
@@ -8113,7 +8102,7 @@
               "type": "REPEAT",
               "content": {
                 "type": "SYMBOL",
-                "name": "type_qualifier"
+                "name": "type_modifier"
               }
             }
           ]
@@ -8162,12 +8151,25 @@
         }
       ]
     },
-    "type_qualifier": {
+    "type_modifier": {
       "type": "CHOICE",
       "members": [
         {
           "type": "STRING",
           "value": "*"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "*"
+            },
+            {
+              "type": "STRING",
+              "value": "const"
+            }
+          ]
         },
         {
           "type": "STRING",

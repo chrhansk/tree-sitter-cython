@@ -245,7 +245,7 @@ module.exports = grammar(Python, {
             optional(seq("=", $.expression)),
             repeat(seq(
               ",",
-              optional($.type_qualifier),
+              optional($.type_modifier),
               $.identifier,
               optional(seq("=", $.expression)),
             )),
@@ -404,12 +404,15 @@ module.exports = grammar(Python, {
         alias(seq("long", "long"), "long long"),
       )),
 
-    // type: ['const'] (NAME ('.' PY_NAME)* | int_type | '(' type ')') ['complex'] [type_qualifier]
+    type_qualifier: $ =>
+      repeat1(choice("const", "volatile")),
+
+    // type: ['const'] (NAME ('.' PY_NAME)* | int_type | '(' type ')') ['complex'] [type_modifier]
     c_type: $ =>
       prec.right(
         PREC.c_type,
         seq(
-          optional(choice("const", "volatile")),
+          optional($.type_qualifier),
           choice(
             seq(
               field("type", $.identifier),
@@ -422,17 +425,17 @@ module.exports = grammar(Python, {
             seq("(", $.c_type, ")"),
           ),
           optional("complex"),
-          repeat($.type_qualifier),
+          repeat($.type_modifier),
         ),
       ),
 
     c_name: $ =>
-      seq(optional($.type_qualifier), $.identifier),
+      seq(optional($.type_modifier), $.identifier),
 
     maybe_typed_name: $ =>
       choice(
         seq(
-          optional(choice("const", "volatile")),
+          optional($.type_qualifier),
           field("type", choice($.identifier, $.int_type)),
           optional(seq(
             repeat(seq(
@@ -440,15 +443,15 @@ module.exports = grammar(Python, {
               $.identifier,
             )),
             optional("complex"),
-            repeat($.type_qualifier),
+            repeat($.type_modifier),
           )),
           field("name", optional(choice($.identifier, $.operator_name, $.c_function_pointer_name))),
-          repeat($.type_qualifier),
+          repeat($.type_modifier),
         ),
         seq(
-          optional(choice("const", "volatile")),
+          optional($.type_qualifier),
           field("name", choice($.identifier, $.operator_name)),
-          repeat($.type_qualifier),
+          repeat($.type_modifier),
         ),
       ),
 
@@ -462,10 +465,11 @@ module.exports = grammar(Python, {
         $.c_parameters,
       ),
 
-    // type_qualifier: '*' | '**' | '&' | type_index ('.' NAME [type_index])*
-    type_qualifier: $ =>
+    // type_modifier: '*' | '**' | '&' | type_index ('.' NAME [type_index])*
+    type_modifier: $ =>
       choice(
         "*",
+        seq("*", "const"),
         "**",
         "&",
         "__stdcall",
