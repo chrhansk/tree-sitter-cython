@@ -696,10 +696,7 @@ module.exports = grammar(Python, {
       repeat1($._enum_statements),
     ),
 
-    _enum_statements: $ => seq(
-      $._enum_statement,
-      optional(repeat(seq(",", $._enum_statement)))
-    ),
+    _enum_statements: $ => commaSep1($._enum_statement),
 
     _enum_statement: $ => seq(
       $.c_identifier, optional(seq("=", $.expression))
