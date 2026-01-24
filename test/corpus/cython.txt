@@ -1221,3 +1221,29 @@ for b in False, True:
       (true))
     (block
       (pass_statement))))
+
+=====================================
+Class definition with const method
+=====================================
+
+cdef cppclass X:
+    void get() nogil const:
+        pass
+
+---
+
+(module
+  (cdef_statement
+    (cdef_type_declaration
+      (ctype_declaration
+        (cppclass
+          (identifier)
+          (cvar_def
+            (maybe_typed_name
+              (identifier)
+              (identifier))
+            (c_function_definition
+              (c_parameters)
+              (gil_spec)
+              (block
+                (pass_statement)))))))))

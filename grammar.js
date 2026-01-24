@@ -527,6 +527,7 @@ module.exports = grammar(Python, {
         optional($.gil_spec),
         optional($.exception_value),
         optional($.gil_spec),
+        optional("const"),
         choice(
           seq(":", $._suite),
           $._newline,
