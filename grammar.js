@@ -681,11 +681,29 @@ module.exports = grammar(Python, {
           seq(
             $.identifier,
             optional(seq("(", $.c_type, ")")),
-            optional(seq(":", $.c_type)),
           ),
         ),
-        choice($._newline, seq(":", $._suite)),
-      ),
+        ":",
+        choice($._enum_suite, $._enum_statements),
+        $._newline),
+
+    _enum_suite: $ => seq(
+      $._indent,
+      $.enum_block,
+      $._dedent),
+
+    enum_block: $ => seq(
+      repeat1($._enum_statements),
+    ),
+
+    _enum_statements: $ => seq(
+      $._enum_statement,
+      optional(repeat(seq(",", $._enum_statement)))
+    ),
+
+    _enum_statement: $ => seq(
+      $.c_identifier, optional(seq("=", $.expression))
+    ),
 
     // Optional alias used in underlying C library
     c_identifier: $ =>

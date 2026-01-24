@@ -542,19 +542,16 @@ cdef numeric add(numeric a, numeric b)
       (ctype_declaration
         (enum
           (identifier)
-          (block
-            (expression_statement
-              (assignment
-                (identifier)
-                (integer)))
-            (expression_statement
-              (assignment
-                (identifier)
-                (integer)))
-            (expression_statement
-              (assignment
-                (identifier)
-                (integer))))))))
+          (enum_block
+            (c_identifier
+              (identifier))
+            (integer)
+            (c_identifier
+              (identifier))
+            (integer)
+            (c_identifier
+              (identifier))
+            (integer))))))
   (cdef_statement
     (cvar_def
       (maybe_typed_name
@@ -1298,3 +1295,105 @@ ctypedef int (*func "alias")()
             (string_content)
             (string_end))))
       (c_parameters))))
+
+================================================================================
+Enums with aliases
+================================================================================
+
+cdef const int value = 2
+
+cdef enum Test1:
+    A "A" = 1 + 2
+    C "C" = value
+
+
+cdef enum Test2:
+    X "X" = 4, Y "Y", Z
+
+cdef enum: Test3
+
+cdef enum: Test4 "Test4" = 5
+
+cdef enum Hello: Test = 1, Test2 = 2
+
+---
+
+(module
+  (cdef_statement
+    (cvar_def
+      (maybe_typed_name
+        (type_qualifier)
+        (int_type)
+        (identifier))
+      (integer)))
+  (cdef_statement
+    (cdef_type_declaration
+      (ctype_declaration
+        (enum
+          (identifier)
+          (enum_block
+            (c_identifier
+              (identifier)
+              (string
+                (string_start)
+                (string_content)
+                (string_end)))
+            (binary_operator
+              (integer)
+              (integer))
+            (c_identifier
+              (identifier)
+              (string
+                (string_start)
+                (string_content)
+                (string_end)))
+            (identifier))))))
+  (cdef_statement
+    (cdef_type_declaration
+      (ctype_declaration
+        (enum
+          (identifier)
+          (enum_block
+            (c_identifier
+              (identifier)
+              (string
+                (string_start)
+                (string_content)
+                (string_end)))
+            (integer)
+            (c_identifier
+              (identifier)
+              (string
+                (string_start)
+                (string_content)
+                (string_end)))
+            (c_identifier
+              (identifier)))))))
+  (cdef_statement
+    (cdef_type_declaration
+      (ctype_declaration
+        (enum
+          (c_identifier
+            (identifier))))))
+  (cdef_statement
+    (cdef_type_declaration
+      (ctype_declaration
+        (enum
+          (c_identifier
+            (identifier)
+            (string
+              (string_start)
+              (string_content)
+              (string_end)))
+          (integer)))))
+  (cdef_statement
+    (cdef_type_declaration
+      (ctype_declaration
+        (enum
+          (identifier)
+          (c_identifier
+            (identifier))
+          (integer)
+          (c_identifier
+            (identifier))
+          (integer))))))
