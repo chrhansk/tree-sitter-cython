@@ -8121,12 +8121,8 @@
           "value": "*"
         },
         {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
+          "type": "SYMBOL",
+          "name": "c_identifier"
         },
         {
           "type": "STRING",
@@ -9237,6 +9233,31 @@
         }
       ]
     },
+    "c_identifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "string"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "cppclass": {
       "type": "SEQ",
       "members": [
@@ -9246,7 +9267,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "c_identifier"
         },
         {
           "type": "CHOICE",

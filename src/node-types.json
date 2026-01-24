@@ -1002,17 +1002,16 @@
   {
     "type": "c_function_pointer_name",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "c_identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1033,6 +1032,32 @@
         },
         {
           "type": "c_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "c_identifier",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -1632,6 +1657,10 @@
       "required": true,
       "types": [
         {
+          "type": "c_identifier",
+          "named": true
+        },
+        {
           "type": "cppclass",
           "named": true
         },
@@ -1641,10 +1670,6 @@
         },
         {
           "type": "cvar_def",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {

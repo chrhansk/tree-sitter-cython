@@ -605,7 +605,8 @@ cdef cppclass Test:
     (cdef_type_declaration
       (ctype_declaration
         (cppclass
-          (identifier)
+          (c_identifier
+            (identifier))
           (cvar_def
             (maybe_typed_name
               (int_type)
@@ -792,7 +793,8 @@ ctypedef int (*printf_func)(const char*, ...)
       (c_type
         (int_type))
       (c_function_pointer_name
-        (identifier))
+        (c_identifier
+          (identifier)))
       (c_parameters
         (maybe_typed_name
           (type_qualifier)
@@ -978,7 +980,8 @@ cdef cppclass Example[T]:
     (cdef_type_declaration
       (ctype_declaration
         (cppclass
-          (identifier)
+          (c_identifier
+            (identifier))
           (template_params
             (template_param
               (identifier)))
@@ -1000,7 +1003,8 @@ cdef cppclass SomeClass[U, V, W=*]:
     (cdef_type_declaration
       (ctype_declaration
         (cppclass
-          (identifier)
+          (c_identifier
+            (identifier))
           (template_params
             (template_param
               (identifier))
@@ -1026,7 +1030,8 @@ cdef const int (*pfunc_add)(const char*, int)
         (type_qualifier)
         (int_type)
         (c_function_pointer_name
-          (identifier)))
+          (c_identifier
+            (identifier))))
       (c_function_definition
         (c_parameters
           (maybe_typed_name
@@ -1237,7 +1242,8 @@ cdef cppclass X:
     (cdef_type_declaration
       (ctype_declaration
         (cppclass
-          (identifier)
+          (c_identifier
+            (identifier))
           (cvar_def
             (maybe_typed_name
               (identifier)
@@ -1247,3 +1253,48 @@ cdef cppclass X:
               (gil_spec)
               (block
                 (pass_statement)))))))))
+
+=====================================
+Class definition with alias
+=====================================
+
+cdef cppclass X "X":
+    pass
+
+---
+
+(module
+  (cdef_statement
+    (cdef_type_declaration
+      (ctype_declaration
+        (cppclass
+          (c_identifier
+            (identifier)
+            (string
+              (string_start)
+              (string_content)
+              (string_end)))
+          (cvar_def
+            (maybe_typed_name
+              (identifier))))))))
+
+=====================================
+Function typedef with alias
+=====================================
+ctypedef int (*func "alias")()
+
+---
+
+(module
+  (ctypedef_statement
+    (c_function_pointer_type
+      (c_type
+        (int_type))
+      (c_function_pointer_name
+        (c_identifier
+          (identifier)
+          (string
+            (string_start)
+            (string_content)
+            (string_end))))
+      (c_parameters))))

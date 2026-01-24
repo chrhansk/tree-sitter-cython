@@ -456,7 +456,7 @@ module.exports = grammar(Python, {
       ),
 
     c_function_pointer_name: $ =>
-      seq("(", "*", field("name", $.identifier), ")"),
+      seq("(", "*", $.c_identifier, ")"),
 
     c_function_pointer_type: $ =>
       seq(
@@ -687,10 +687,14 @@ module.exports = grammar(Python, {
         choice($._newline, seq(":", $._suite)),
       ),
 
+    // Optional alias used in underlying C library
+    c_identifier: $ =>
+      seq(field("name", $.identifier), optional($.string)),
+
     cppclass: $ =>
       seq(
         "cppclass",
-        $.identifier,
+        $.c_identifier,
         optional($.template_params),
         optional("nogil"),
         choice($._newline, seq(":", $._cppclass_suite)),
