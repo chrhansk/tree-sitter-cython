@@ -18,7 +18,6 @@ const PREC = Object.assign({}, Python.PREC, {
   gil_spec_exception_value: 1,
   new: 23,
   cast: 24,
-  lambda_parameters: 25,
 });
 
 module.exports = grammar(Python, {
@@ -545,27 +544,6 @@ module.exports = grammar(Python, {
         "[",
         commaSep1($.template_param),
         "]",
-      ),
-
-    lambda_parameters: $ =>
-      prec.right(
-        PREC.lambda_parameters,
-        choice(
-          $.identifier,
-          $.tuple_pattern,
-          $._parameters,
-        ),
-      ),
-
-    lambda: $ =>
-      prec(
-        PREC.lambda,
-        seq(
-          "lambda",
-          field("parameters", optional($.lambda_parameters)),
-          ":",
-          field("body", $.expression),
-        ),
       ),
 
     c_parameters: $ => seq("(", optional($._typedargslist), ")"),

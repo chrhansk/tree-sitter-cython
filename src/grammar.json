@@ -1759,25 +1759,8 @@
       ]
     },
     "lambda_parameters": {
-      "type": "PREC_RIGHT",
-      "value": 25,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "identifier"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "tuple_pattern"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_parameters"
-          }
-        ]
-      }
+      "type": "SYMBOL",
+      "name": "_parameters"
     },
     "list_splat": {
       "type": "SEQ",
