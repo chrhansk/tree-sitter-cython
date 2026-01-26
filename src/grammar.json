@@ -8092,6 +8092,31 @@
         }
       ]
     },
+    "c_function_pointer_type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "c_type"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "c_parameters"
+        }
+      ]
+    },
     "c_function_pointer_name": {
       "type": "SEQ",
       "members": [
@@ -8113,7 +8138,7 @@
         }
       ]
     },
-    "c_function_pointer_type": {
+    "c_function_pointer": {
       "type": "SEQ",
       "members": [
         {
@@ -8406,7 +8431,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "c_function_pointer_type"
+              "name": "c_function_pointer"
             },
             {
               "type": "SYMBOL",
@@ -9540,8 +9565,17 @@
             "value": "<"
           },
           {
-            "type": "SYMBOL",
-            "name": "c_type"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "c_type"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "c_function_pointer_type"
+              }
+            ]
           },
           {
             "type": "CHOICE",

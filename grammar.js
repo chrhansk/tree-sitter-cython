@@ -454,10 +454,18 @@ module.exports = grammar(Python, {
         ),
       ),
 
+    c_function_pointer_type: $ =>
+      seq(
+        $.c_type,
+        "(", "*", ")",
+        $.c_parameters,
+      ),
+
+
     c_function_pointer_name: $ =>
       seq("(", "*", $.c_identifier, ")"),
 
-    c_function_pointer_type: $ =>
+    c_function_pointer: $ =>
       seq(
         $.c_type,
         $.c_function_pointer_name,
@@ -506,7 +514,7 @@ module.exports = grammar(Python, {
       seq(
         repeat($.storageclass),
         "ctypedef",
-        choice($.cvar_decl, $.c_function_pointer_type, $.struct, $.enum, $.fused, $.class_definition, $.extern_block),
+        choice($.cvar_decl, $.c_function_pointer, $.struct, $.enum, $.fused, $.class_definition, $.extern_block),
         optional(";"),
       ),
 
@@ -761,7 +769,7 @@ module.exports = grammar(Python, {
         PREC.cast,
         seq(
           "<",
-          $.c_type,
+          choice($.c_type, $.c_function_pointer_type),
           optional("?"),
           ">",
           $.expression,

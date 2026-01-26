@@ -1000,6 +1000,29 @@
     }
   },
   {
+    "type": "c_function_pointer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "c_function_pointer_name",
+          "named": true
+        },
+        {
+          "type": "c_parameters",
+          "named": true
+        },
+        {
+          "type": "c_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "c_function_pointer_name",
     "named": true,
     "fields": {},
@@ -1022,10 +1045,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "c_function_pointer_name",
-          "named": true
-        },
         {
           "type": "c_parameters",
           "named": true
@@ -1319,6 +1338,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "c_function_pointer_type",
+          "named": true
+        },
         {
           "type": "c_type",
           "named": true
@@ -1715,7 +1738,7 @@
       "required": true,
       "types": [
         {
-          "type": "c_function_pointer_type",
+          "type": "c_function_pointer",
           "named": true
         },
         {

@@ -786,7 +786,7 @@ ctypedef int (*printf_func)(const char*, ...)
 
 (module
   (ctypedef_statement
-    (c_function_pointer_type
+    (c_function_pointer
       (c_type
         (int_type))
       (c_function_pointer_name
@@ -1284,7 +1284,7 @@ ctypedef int (*func "alias")()
 
 (module
   (ctypedef_statement
-    (c_function_pointer_type
+    (c_function_pointer
       (c_type
         (int_type))
       (c_function_pointer_name
