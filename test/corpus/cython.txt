@@ -1397,3 +1397,25 @@ cdef enum Hello: Test = 1, Test2 = 2
           (c_identifier
             (identifier))
           (integer))))))
+
+================================================================================
+Struct with function pointer
+================================================================================
+ctypedef struct S:
+    void (*ptr)(object)
+---
+
+(module
+  (ctypedef_statement
+    (struct
+      (identifier)
+      (struct_suite
+        (c_function_pointer
+          (c_type
+            (identifier))
+          (c_function_pointer_name
+            (c_identifier
+              (identifier)))
+          (c_parameters
+            (maybe_typed_name
+              (identifier))))))))

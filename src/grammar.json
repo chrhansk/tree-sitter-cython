@@ -9092,8 +9092,17 @@
                 {
                   "type": "REPEAT",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "cvar_decl"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "cvar_decl"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "c_function_pointer"
+                      }
+                    ]
                   }
                 },
                 {

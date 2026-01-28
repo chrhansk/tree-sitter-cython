@@ -4085,6 +4085,10 @@
           "named": true
         },
         {
+          "type": "c_function_pointer",
+          "named": true
+        },
+        {
           "type": "cvar_decl",
           "named": true
         },

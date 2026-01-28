@@ -650,7 +650,7 @@ module.exports = grammar(Python, {
         seq(
           $._indent,
           choice(
-            repeat($.cvar_decl),
+            repeat(choice($.cvar_decl, $.c_function_pointer)),
             $.pass_statement,
           ),
           $._dedent,
