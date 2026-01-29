@@ -122,7 +122,7 @@ assert await a(b) == c
     (parameters
       (typed_parameter
         (identifier)
-        (c_type
+        (type
           (identifier))))
     (type
       (identifier))
