@@ -683,7 +683,7 @@ module.exports = grammar(Python, {
     _enum_statements: $ => commaSep1($._enum_statement),
 
     _enum_statement: $ => seq(
-      $.c_identifier, optional(seq("=", $.expression))
+      $.c_identifier, optional(seq("=", $.expression)),
     ),
 
     // Optional alias used in underlying C library
