@@ -516,7 +516,8 @@ cdef numeric add(numeric a, numeric b)
       (extern_suite
         (ctypedef_statement
           (struct
-            (identifier)
+            (c_identifier
+              (identifier))
             (struct_suite
               (cvar_decl
                 (c_type
@@ -1075,7 +1076,8 @@ sizeof(Spam (*)())
     (cdef_type_declaration
       (ctype_declaration
         (struct
-          (identifier)
+          (c_identifier
+            (identifier))
           (struct_suite
             (cvar_decl
               (c_type
@@ -1408,7 +1410,8 @@ ctypedef struct S:
 (module
   (ctypedef_statement
     (struct
-      (identifier)
+      (c_identifier
+        (identifier))
       (struct_suite
         (c_function_pointer
           (c_type
@@ -1419,3 +1422,62 @@ ctypedef struct S:
           (c_parameters
             (maybe_typed_name
               (identifier))))))))
+
+================================================================================
+Type hints
+================================================================================
+from typing import *
+def func1(x:int | None):
+    pass
+
+def func2(x:Optional[int]):
+    pass
+
+def func3(x:Tuple[int, float]):
+    pass
+---
+
+(module
+  (import_from_statement
+    (dotted_name
+      (identifier))
+    (wildcard_import))
+  (function_definition
+    (identifier)
+    (parameters
+      (typed_parameter
+        (identifier)
+        (type
+          (binary_operator
+            (identifier)
+            (none)))))
+    (block
+      (pass_statement)))
+  (function_definition
+    (identifier)
+    (parameters
+      (typed_parameter
+        (identifier)
+        (type
+          (generic_type
+            (identifier)
+            (type_parameter
+              (type
+                (identifier)))))))
+    (block
+      (pass_statement)))
+  (function_definition
+    (identifier)
+    (parameters
+      (typed_parameter
+        (identifier)
+        (type
+          (generic_type
+            (identifier)
+            (type_parameter
+              (type
+                (identifier))
+              (type
+                (identifier)))))))
+    (block
+      (pass_statement))))

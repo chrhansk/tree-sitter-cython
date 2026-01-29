@@ -618,7 +618,7 @@ module.exports = grammar(Python, {
               $.dictionary_splat_pattern,
             ),
             ":",
-            field("type", choice($.c_type, $.string)),
+            field("type", $.type),
           ),
         ),
       ),

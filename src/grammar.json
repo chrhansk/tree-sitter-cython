@@ -5037,17 +5037,8 @@
                 "type": "FIELD",
                 "name": "type",
                 "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "c_type"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "string"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "type"
                 }
               }
             ]

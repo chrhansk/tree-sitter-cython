@@ -4420,7 +4420,7 @@
             "named": true
           },
           {
-            "type": "string",
+            "type": "type",
             "named": true
           }
         ]
