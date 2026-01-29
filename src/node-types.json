@@ -1060,6 +1060,16 @@
     "type": "c_identifier",
     "named": true,
     "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1070,16 +1080,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "string",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1793,6 +1793,10 @@
       "types": [
         {
           "type": "c_function_definition",
+          "named": true
+        },
+        {
+          "type": "c_identifier",
           "named": true
         },
         {
@@ -4041,24 +4045,13 @@
   {
     "type": "struct",
     "named": true,
-    "fields": {
-      "alias": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "c_identifier",
           "named": true
         },
         {

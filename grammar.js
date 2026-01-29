@@ -309,8 +309,7 @@ module.exports = grammar(Python, {
             optional(seq("=", $.expression)),
             repeat(seq(
               ",",
-              $.identifier,
-              optional(field("alias", $.string)),
+              $.c_identifier,
               optional(seq("=", $.expression)),
             )),
             $._newline,
@@ -640,8 +639,7 @@ module.exports = grammar(Python, {
       seq(
         repeat($.storageclass),
         choice("struct", "union"),
-        $.identifier,
-        optional(field("alias", $.string)),
+        $.c_identifier,
         choice($._newline, seq(":", $.struct_suite)),
       ),
     struct_suite: $ =>
@@ -690,7 +688,7 @@ module.exports = grammar(Python, {
 
     // Optional alias used in underlying C library
     c_identifier: $ =>
-      seq(field("name", $.identifier), optional($.string)),
+      seq(field("name", $.identifier), optional(field("alias", $.string))),
 
     cppclass: $ =>
       seq(
